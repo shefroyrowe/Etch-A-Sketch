@@ -1,9 +1,10 @@
 const containerSize = 32; //32em css size
 const gridSize = prompt("Enter grid size",);//limit to 100x100 grid and convert to input element
 
+//query and stle container with width and height
 const container = document.getElementById('grid-container');
-container.style.width = `${containerSize}em`;
-container.style.height = `${containerSize}em`;
+container.style.width = `${containerSize}em`;//add unit size(em)
+container.style.height = `${containerSize}em`;//add unit size(em)
 
 //function to dynamically generate grids of any size
 const makeGrid = () => {
