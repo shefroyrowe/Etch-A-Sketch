@@ -7,27 +7,11 @@ html {
 #grid-container {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     border: 2px solid red;
-    width: 30em;
-    height: 30em;
 }
 
 .grid-box {
-    width: .9em;
-    height: .9em;
     border: 1px solid blue;
 }
-
-/*
-    16x16 square = 256 grid-boxes
-    width: 1.75em;
-    height: 1.75em;
-
-    24x24 square = 576 grid-boxes
-    width: 1.125em;
-    height: 1.125em;
-
-    31x31 square = 961 grid boxes
-    width: calc(1.125em - .2830em);
-    height: calc(1.125em - .2830em);
-    */
