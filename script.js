@@ -1,5 +1,5 @@
 const containerSize = 32; //32em css unit size
-//const gridSize = prompt("Enter grid size between 1 - 100",);//limit to 100x100 grid and convert to input element
+const gridSize = prompt("Enter grid size between 1 - 100",);//limit to 100x100 grid and convert to input element
 
 //query and stle container with width and height
 const container = document.getElementById('grid-container');
@@ -68,9 +68,16 @@ const makeGrid = () => {
                 }
             });
         });
-        
+        //reset all cells
     }//end for loop
 }
 
 //call makeGrid
 makeGrid();
+
+
+//notes to self
+//--complete reset button logic 
+//--finish styling 
+//--add value dropdown in place of prompt
+//--turn ui into glass
