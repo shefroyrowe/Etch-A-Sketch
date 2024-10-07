@@ -65,6 +65,9 @@ const makeGrid = () => {
                             gridBox.style.backgroundColor = '';
                         });
                         break;
+                        case "reset":
+                            gridBox.style.backgroundColor = '';
+                        break;
                 }
             });
         });
