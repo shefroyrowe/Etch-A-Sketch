@@ -1,5 +1,5 @@
 const containerSize = 32; //32em css unit size
-const gridSize = prompt("Enter grid size between 1 - 100",);//limit to 100x100 grid and convert to input element
+const boxPerSide = document.getElementById('grid-side');
 
 //query and stle container with width and height
 const container = document.getElementById('grid-container');
@@ -14,21 +14,23 @@ const getRandomColor = () => {
     let letters = '0123456789ABCDEF';
     let color = '#';
     for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 17)];
+        color += letters[Math.floor(Math.random() * 17)];
     }
     return color;
-  }
+}
 
-  //fade to black generator
-  const fadeIn = (element) => {
+//fade to black generator
+const greyScale = (element) => {
     let random = Math.floor(Math.random() * 255);
-     element.style.backgroundColor = `rgb(${random},${random},${random})`;
-  }
+    element.style.backgroundColor = `rgb(${random},${random},${random})`;
+}
 
 //function to dynamically generate grids of any size
-const makeGrid = () => {
+const makeGrid = (gridSize) => {
+
     const fullGridSize = (gridSize * gridSize);//complete number of grid cells
-    const gridBoxSize = `${(containerSize / gridSize) - 0.125}em`;//0.125 equivalent to 2px
+    //0.125em equivalent to 2px (to compensate for 1px container border and 1px gridBox border)
+    const gridBoxSize = `${(containerSize / gridSize) - 0.125}em`;
 
     for (let i = 0; i < fullGridSize; i++) {
         const gridBox = document.createElement('div');
@@ -40,6 +42,8 @@ const makeGrid = () => {
         //add class to each cell and append to contaner
         gridBox.className = 'grid-box';
         container.appendChild(gridBox);
+
+        boxPerSide.value = '';
 
         //color features switch statement
         featureButtons.forEach((button) => {
@@ -55,18 +59,18 @@ const makeGrid = () => {
                             gridBox.style.backgroundColor = getRandomColor();
                         });
                         break;
-                        case "fade-in":
-                        gridBox.addEventListener('mouseover', () => { 
-                            fadeIn(gridBox);
+                    case "grey-scale":
+                        gridBox.addEventListener('mouseover', () => {
+                                greyScale(gridBox);
                         });
                         break;
-                        case "erase":
-                        gridBox.addEventListener('mouseover', () => { 
-                            gridBox.style.backgroundColor = '';
+                    case "erase":
+                        gridBox.addEventListener('mouseover', () => {
+                                gridBox.style.backgroundColor = '';
                         });
                         break;
-                        case "reset":
-                            gridBox.style.backgroundColor = '';
+                    case "reset":
+                        gridBox.style.backgroundColor = '';
                         break;
                 }
             });
@@ -75,12 +79,16 @@ const makeGrid = () => {
     }//end for loop
 }
 
-//call makeGrid
-makeGrid();
-
-
-//notes to self
-//--complete reset button logic 
-//--finish styling 
-//--add value dropdown in place of prompt
-//--turn ui into glass
+//call makeGrid through input field event listener
+boxPerSide.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        //check if number value greater than 100 or less than 1
+        if (e.target.value > 0 && e.target.value <= 100) {
+            container.innerHTML = '';
+            makeGrid(e.target.value);//get input field value
+        } else {
+            //validate message if error
+            alert("Enter a number between 0 and 100")
+        }
+    }
+});
